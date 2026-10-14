@@ -12,6 +12,8 @@ function render (html) {
 */
 function greet () {
   // TODO: Write your code here
+  const userName = prompt("What is your name?");
+  render(`<p> Hello, ${userName}! </p>`);
 }
 
 /* 

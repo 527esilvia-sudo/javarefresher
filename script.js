@@ -8,12 +8,16 @@ function render (html) {
   ---------------------
   - Prompt the user for their name
   - If they type something, display "Hello, NAME!"
-  - If they cancel or leave blank, show a friendly message
 */
 function greet () {
   // TODO: Write your code here
-  const userName = prompt("What is your name?");
-  render(`<p> Hello, ${userName}! </p>`);
+  const userName= prompt("What is your name?");
+  if(!userName || !userName.trim()){
+    render("<p class = 'text-muted'> No name entered </p>")}
+    else{
+    render(`<p> Hello ${userName}</p>`)
+  }
+    
 }
 
 /* 
@@ -26,6 +30,28 @@ function greet () {
 */
 function averageNumbers () {
   // TODO: Write your code here
+  const nums = prompt('Enter a list of numbers, seperated by commas: ')
+  if (!nums){
+    render("<p class = 'text-muted'> No numbers entered </p>")
+    return
+  }
+
+  const numArray = nums
+                  .split(',')
+                  .map(n=> parseFloat(n.trim()))
+                  .filter((n)=> !isNaN(n))
+const sum = numArray.reduce((a,b) => a + b ,0)
+
+const avg = sum / numArray.length
+
+const list = numArray.map(n => `<li class = "list-group-item"> ${n}</li>`).join('')
+
+render
+  (`<p> Average: <strong> ${avg} </strong> </p>
+    <ul class = "list-group">  ${list} </ul>`
+  )
+    
+
 }
 
 /* 
@@ -37,6 +63,16 @@ function averageNumbers () {
 */
 function timeOfDay () {
   // TODO: Write your code here
+  const h = new Date().getHours()
+  let msg = ''
+  if (h<12){
+    msg = 'Good morning!'
+  } else if (h<18){
+    msg = 'Good afternoon!'
+  } else {
+    msg = 'Good evening!'
+  }
+  render(`<p>${msg}</p>`)
 }
 
 /* 
@@ -49,6 +85,7 @@ function timeOfDay () {
 */
 function randomBetween () {
   // TODO: Write your code here
+  
 }
 
 /* 
@@ -82,3 +119,7 @@ document.getElementById('btnClear').addEventListener('click', clearOutput)
   Write each function below, and don’t forget to connect each one 
   to a new button in index.html using addEventListener.
 */
+function changeTitle() {
+getElementByClass('title').innerText = prompt("What grade are you in? ") + "th grade" + " - Java Refresher";
+render("<p>Title changed!</p>")
+}

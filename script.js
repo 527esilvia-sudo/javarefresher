@@ -120,6 +120,40 @@ document.getElementById('btnClear').addEventListener('click', clearOutput)
   to a new button in index.html using addEventListener.
 */
 function changeTitle() {
-getElementByClass('title').innerText = prompt("What grade are you in? ") + "th grade" + " - Java Refresher";
-render("<p>Title changed!</p>")
+  const titleElement = document.querySelector('.title');
+  if (!titleElement) {
+  titleElement.innerText = 'Java Refresher';
+  }
+  else{
+     const grade = prompt('What grade are you in?');
+    titleElement.innerText = grade + 'th grade - Java Refresher';
+  }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  changeTitle();
+});
+
+
+
+
+
+const buttons = document.querySelectorAll("#btnGreet, #btnAvg, #btnTime, #btnRandom, #btnClear");
+
+const colors = ["#d9a47b", "#4b9365", "#dcb07f", "#8e6e5b", "#f09090", "#96afe3"];
+
+buttons.forEach(function(button) {
+    let colorIndex = 0;
+
+    button.addEventListener("click", function() {
+        button.style.backgroundColor = colors[colorIndex];
+
+        colorIndex++;
+
+        if (colorIndex >= colors.length) {
+            colorIndex = 0;
+        }
+    });
+});
+
+
